@@ -8,6 +8,7 @@ mensagem e retornando true ou false. */
 
 
 function anoBissexto (ano) {
+  
   if (!(ano % 400)) {
     console.log(`${ano} é bissexto.`)
   } else if ((ano % 100) && !(ano % 4)) {
