@@ -25,7 +25,6 @@ comparaComThisArrow(module.exports)
 
 // arrow function com BIND
 console.log("----------------------- arrow function com bind")
-
 comparaComThisArrow = comparaComThisArrow.bind(obj)
 comparaComThisArrow(obj)
 comparaComThisArrow(this)

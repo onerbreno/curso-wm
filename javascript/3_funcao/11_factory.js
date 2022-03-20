@@ -1,5 +1,5 @@
 // O que é uma função factory?
-// Factory é uma função que retorna uma objeto
+// Semelhante funcão construtora e classe, FACTORY é uma função que retorna um objeto
 
 function criarPessoa(nome, sobrenome) {
   return {

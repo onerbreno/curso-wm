@@ -4,7 +4,7 @@ class Pessoa {
   }
 
   falar() {
-    console.log(`Meu nome é ${this.nome}`)
+    return `Meu nome é ${this.nome}`
   }
 }
 

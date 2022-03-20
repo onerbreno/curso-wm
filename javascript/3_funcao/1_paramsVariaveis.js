@@ -1,4 +1,4 @@
-// Só posso usar paramêtros em uma função se eles forem definidos? NÃO
+// Só posso usar paramêtros em uma função se elas forem definidos? NÃO
 
 // Como faço para pegar os paramêtros váriaveis?
 

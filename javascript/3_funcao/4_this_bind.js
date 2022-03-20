@@ -16,7 +16,6 @@ falarDePessoa()
 
 
 // Outra opção:
-
 function Pessoa2() {
   this.idade = 0
 

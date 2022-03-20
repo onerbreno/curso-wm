@@ -1,8 +1,8 @@
 // São funções usadas para construir objetos
 
 function Ventilador(velMax) {
-  this.velocidadeMaxima = velMax;
-  this.ligado = false;
+  this.velocidadeMaxima = velMax; // método público
+  this.ligado = false; // método público
 }
         
 // Instâncias

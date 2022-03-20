@@ -1,4 +1,4 @@
-# THIS é uma forma de referenciar o objetivo atual daquela execução.
+# THIS é uma forma de referenciar o objeto atual daquela execução.
 
 ## Em uma função tradicional o THIS pode variar de acordo com quem chamou a função.
 

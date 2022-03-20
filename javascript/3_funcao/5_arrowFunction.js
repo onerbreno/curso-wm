@@ -1,4 +1,4 @@
-// Arrow Function é uma função anonima, utilizada para reduzir a sintaxe.
+// Arrow Function é uma função anônima, utilizada para reduzir a sintaxe.
 dobro = (a) => {
   return 2 * a
 }
@@ -12,7 +12,6 @@ console.log(ola())
 
 
 // Como o THIS reage em uma Arrow Function? Ele se torna "constante", não varia
-
 function Pessoa() {
   this.idade = 0
 
