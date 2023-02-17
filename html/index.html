@@ -12,7 +12,8 @@
     </header>
 
     <nav>
-        <a href="exercicios/teste.html">00 - Teste</a>
+        <a href="exercicios/tabela.html">06 - Tabela</a>
+        <a href="exercicios/form/form.html">07 - Formulário</a>
     </nav>
 
     <main>
@@ -22,15 +23,26 @@
     <script>
         document.querySelectorAll('a').forEach(link => {
             const conteudo = document.getElementById('conteudo')
-
+            const script = ''
             link.onclick = function(e) {
                 e.preventDefault()
                 fetch(link.href)
                 .then(res => res.text())
-                .then(html => conteudo.innerHTML = html)
-                
+                .then(html => {
+                    conteudo.innerHTML = html
+                    parseHtmlAndExecuteViewScriptIfAny(html)
+                })
             }
         })
+
+        function parseHtmlAndExecuteViewScriptIfAny(htmlText) {
+            let parser = new DOMParser();
+            let doc = parser.parseFromString(htmlText, "text/html");
+            let script = doc.querySelector('script')
+            if (script) {
+                eval(script.text)
+            }
+        }
     </script>
 </body>
 </html>
