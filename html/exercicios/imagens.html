@@ -1,0 +1,62 @@
+<div wm-slider>
+    <p>
+        <img src="https://source.unsplash.com/random/" alt="random image" height="342" title="random image">
+    </p>
+
+    <p>
+        <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5eeea355389655.59822ff824b72.gif"
+            alt="random image" height="342" title="random image">
+    </p>
+
+    <p>
+        <img src="https://static.vecteezy.com/system/resources/previews/001/187/508/original/heart-png.png"
+            alt="random image" height="342" title="random image">
+    </p>
+</div>
+
+<style>
+    [wm-slider] p {
+        position: absolute;
+        display: none;
+    }
+</style>
+
+<script>
+    function mover(elem, inicio, fim, passo, callback) {
+        const novoInicio = inicio + passo
+        if (novoInicio <= fim) {
+            elem.style.left = novoInicio + 'px'
+            setTimeout(() => mover(elem, novoInicio, fim, passo, callback), 20)
+        } else {
+            callback()
+        }
+    }
+
+    function slider() {
+        const elementos = document.querySelectorAll('[wm-slider] > p')
+        const slides = Array.from(elementos)
+        exibirSlide(slides, slides[0])
+    }
+
+    function exibirSlide(slides, slide) {
+        slide.style.display = 'block'
+
+        const inicio = -slide.clientWidth
+        const fim = innerWidth
+
+        slide.style.left = `${inicio}px`
+
+        mover(slide, inicio, fim, 5, () => {
+            slide.style.diplay = 'none'
+            exibirSlide(slides, getProximo(slides, slide))
+        })
+    }
+
+    function getProximo(lista, atual) {
+        const i = lista.indexOf(atual) + 1
+        return i < lista.length ? lista[i] : lista[0]
+    }
+
+    slider()
+
+</script>
