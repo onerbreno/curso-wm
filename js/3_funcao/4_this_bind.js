@@ -1,4 +1,15 @@
+const carro = { 
+  modelo: 'fiat uno',
+  falarModelo() {
+    console.log(carro.modelo) // exemplo sem o this, abordagem menos flexível se o nome do
+    // objeto mudar ou se você quiser reutilizar a função falar em outros objetos
+  }
+}
+carro.falarModelo()
+
+
 // Como mudar a referência do THIS? Utilize o BIND:
+
 
 const pessoa = { 
   saudacao: 'Bom dia!',

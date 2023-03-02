@@ -28,9 +28,9 @@ console.log(notasBaixas2)
 
 
 // Exemplo no browser
-document.getElementsByTagName('body')[0].onclick = () => console.log("O evento ocorreu!")
+// document.querySelector('body').onclick = () => console.log("O evento ocorreu!")
 
-document.getElementsByTagName('body')[0].addEventListener('click', () => {
-  console.log("O evento ocorreu!")
-})
+// document.getElementsByTagName('body')[0].addEventListener('click', () => {
+//   console.log("O evento ocorreu!")
+// })
 
