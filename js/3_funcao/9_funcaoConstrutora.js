@@ -18,8 +18,8 @@ function Carro(velocidadeMaxima = 200, delta = 5) {
     return velocidadeAtual
   }
 }
-
 const uno = new Carro
+console.log(uno)
 uno.acelarar()
 console.log(uno.getVelocidadeAtual())
 
