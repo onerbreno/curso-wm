@@ -1,149 +1,180 @@
-// Criando uma Cadeia de protótipos (prototype chain)
-const avo = { 
-    attr1: 'A' 
-}
+// // Entendendo prototype
+// const ferrari = {
+//     modelo: 'F40',
+//     velMax: 324
+    
+// }
+// const volvo = {
+//     modelo: 'V40',
+//     velMax: 200
+// }
+// console.log(ferrari.prototype) // apenas funções tem o atributo prototype
+// console.log(ferrari.__proto__)
+// console.log(ferrari.__proto__)
+// console.log(ferrari.__proto__ == Object.prototype)
+// console.log(volvo.__proto__ == Object.prototype)
+// console.log(Object.prototype.__proto__)
 
-const pai1 = { 
-    __proto__: avo, // Forma literal de setar herança
-    attr2: 'B', 
-    attr3: '3'
-} 
+// function MeuObjeto() {}
+// console.log(typeof Object, typeof MeuObjeto)
+// console.log(Object.prototype, MeuObjeto.prototype)
 
-const filho = { 
-    __proto__: pai1, 
-    attr3: 'C' 
-}
+// // -----------------------------------------------------------------------
+// // Criando uma Cadeia de protótipos (prototype chain)
+// const avo = { 
+//     attr1: 'A' 
+// }
 
-console.log(filho.attr0, filho.attr1, filho.attr2, filho.attr3); // undefined A B C
-Object.prototype.attr0 = 0; // Não faça isso em casa!
+// const pai1 = { 
+//     __proto__: avo, // Forma literal de setar herança
+//     attr2: 'B', 
+//     attr3: '3'
+// } 
 
-console.log(filho.attr0, filho.attr1, filho.attr2, filho.attr3); // 0 A B C
+// const filho = { 
+//     __proto__: pai1, 
+//     attr3: 'C' 
+// }
 
-// Outro exemplo de setar herança 
-const carro = {
-    velAtual: 0,
-    velMax: 200,
-    acelerarMais(delta) {
-          if (this.velAtual + delta <= this.velMax) {
-              this.velAtual += delta;
-          } else {
-              this.velAtual = this.velMax;
-          }
-    },
-    status() {
-        return `${this.velAtual} Km/h de ${this.velMax} Km/h`;
-    }
-}
+// console.log(filho.attr0, filho.attr1, filho.attr2, filho.attr3); // undefined A B C
+// Object.prototype.attr0 = 0; // Não faça isso em casa!
+// console.log(filho.attr0, filho.attr1, filho.attr2, filho.attr3); // 0 A B C
 
-const ferrari2 = {
-    modelo: 'F40',
-    velMax: 324, // shadowing (sombreamento do atributo do pai)
+// // Outro exemplo de setar herança 
+// const carro = {
+//     velAtual: 0,
+//     velMax: 200,
+//     acelerarMais(delta) {
+//           if (this.velAtual + delta <= this.velMax) {
+//               this.velAtual += delta;
+//           } else {
+//               this.velAtual = this.velMax;
+//           }
+//     },
+//     status() {
+//         return `${this.velAtual} Km/h de ${this.velMax} Km/h`;
+//     }
+// }
 
-}
+// const ferrari2 = {
+//     modelo: 'F40',
+//     velMax: 324, // shadowing (sombreamento do atributo do pai)
 
-const volvo2 = {
-    modelo: 'V40',
-    status() {
-        return `${this.modelo}: ${super.status()}`;
-    }
-}
+// }
 
-Object.setPrototypeOf(ferrari2, carro); // Função para setar herança
-Object.setPrototypeOf(volvo2, carro);
+// const volvo2 = {
+//     modelo: 'V40',
+//     status() {
+//         return `${this.modelo}: ${super.status()}`;
+//     }
+// }
 
-console.log(ferrari2); 
-console.log(volvo2);
+// Object.setPrototypeOf(ferrari2, carro); // Função para setar herança, equivalente a 
+// // adicionar a propriedade __proto__ apontando para o objeto pai
 
-volvo2.acelerarMais(100);
-console.log(volvo2.status());
+// Object.setPrototypeOf(volvo2, carro);
 
-ferrari2.acelerarMais(300);
-console.log(ferrari2.status());
+// console.log(ferrari2); 
+// console.log(volvo2); // ao chamar o objeto convertido para string são lidos 
+// // apenas os atributos e funções que pertencem ao próprio objeto
 
+// volvo2.acelerarMais(100);
+// console.log(volvo2.status());
 
-console.log('------------------------------')
+// ferrari2.acelerarMais(300);
+// console.log(ferrari2.status());
 
-// Outro exemplo de herança
-// Object.keys() e For In -> herança
-const pai2 = { nome: 'Pedro', corCabelo: 'preto' }
-const filha1 = Object.create(pai2)
-filha1.nome = 'Ana';
-console.log(filha1.corCabelo); // preto
+// console.log('------------------------------')
 
-const filha2 = Object.create(pai2, { // função aceita com primeiro parametro quem é pai, seguido pelas caracteríscas desse novo objeto
-    nome: {
-        value: 'Bia',
-        writable: false,
-        enumerable: true
-    }
-});
+// // -----------------------------------------------------------------------
 
-console.log(filha2.nome)
-filha2.nome = 'Carla';
-console.log(`${filha2.nome} tem cabelo ${filha2.corCabelo}`);
+// // Outro exemplo de herança
+// const pai = { nome: 'Pedro', corCabelo: 'preto' }
+// const filha1 = Object.create(pai)
+// filha1.nome = 'Ana';
+// console.log(filha1.corCabelo); // preto
 
-console.log(Object.keys(filha1)); // Object.keys() por padrão retorna apenas os atributos e comportamentos declarados no objeto, sem listar os herdados
-console.log(Object.keys(filha2));
+// const filha2 = Object.create(pai, { // função aceita com primeiro parâmetro quem é o 
+// // objeto pai, seguido pelos atributos desse novo objeto
+//     nome: {
+//         value: 'Bia',
+//         writable: false,
+//         enumerable: true
+//     }
+// });
 
-for (let key in filha2) { // Com o For In é listado tanto os atributos e métodos do objeto filho quanto do objeto pai
+// console.log(filha2.nome)
+// filha2.nome = 'Carla';
+// console.log(`${filha2.nome} tem cabelo ${filha2.corCabelo}`);
 
-    filha2.hasOwnProperty(key) ? console.log(key) : console.log(`por herança: ${key}`); // hasOwnProperty() conseguimos testar se um atributo ou método pertence ao próprio objeto, caso falso, é recebido por herança.
-}
+// console.log(Object.keys(filha1)); // Object.keys() por padrão retorna apenas os atributos e comportamentos 
+// // declarados no objeto, sem listar os herdados
+// console.log(Object.keys(filha2));
 
-
-
-// prototype != __proto__
-
-console.log('------------------------------')
-function MeuObjeto() {}
-
-console.log(MeuObjeto.prototype); 
-
-const obj1 = new MeuObjeto;
-const obj2 = new MeuObjeto;
-console.log(obj1.__proto__ === obj2.__proto__); // true
-console.log(MeuObjeto.prototype === obj1.__proto__); // true
-
-MeuObjeto.prototype.nome = 'Anônimo'; // prototype: Pertence a função construtora e serve para adicionar comportamentos a ela depois de criada
-MeuObjeto.prototype.falar = function() {
-    console.log(`Bom dia! Meu nome é ${this.nome}`);
-}
-obj1.falar();
-obj2.nome = 'Rafael';
-obj2.falar();
-
-const obj3 = {};
-obj3.__proto__ = MeuObjeto.prototype; // __proto__: Pertence a instância e é uma referência ao objeto-pai.
-obj3.nome = "Obj3";
-obj3.falar();
-
+// for (let key in filha2) { // Com o For In é listado tanto os atributos e métodos do objeto filho quanto do objeto pai
+//     // hasOwnProperty() conseguimos testar se um atributo ou método pertence ao próprio objeto, caso falso, é recebido por herança.
+//     filha2.hasOwnProperty(key) ? console.log(key) : console.log(`por herança: ${key}`); 
+// }
 
 
 
-console.log('------------------------------')
-// Com o conceito de protótipo e herança podemos criar novos comportamentos em funções construturoras da própria API
-console.log(typeof String);
-console.log(typeof Array);
-console.log(typeof Object);
+// // prototype != __proto__
 
-String.prototype.reverse = function () {
-    return this.split('').reverse().join('');
-}
+// console.log('------------------------------')
 
-console.log('Escola Cod3r'.reverse());
+// function MeuObjeto() {}
+// console.log(MeuObjeto.prototype); 
 
-Array.prototype.first = function () {
-    return this[0];
-}
+// const obj1 = new MeuObjeto;
+// const obj2 = new MeuObjeto;
+// console.log(obj1.__proto__ === obj2.__proto__); // true
+// console.log(MeuObjeto.prototype === obj1.__proto__); // true
 
-console.log([1, 2, 3, 4, 5].first());
-console.log(['a', 'b', 'c'].first());
 
-String.prototype.toString = function () {
-    return 'Lascou tudo!';
-}
+// MeuObjeto.prototype.nome = 'Anônimo';
+// MeuObjeto.prototype.falar = function() {
+//     console.log(`Bom dia! Meu nome é ${this.nome}`);
+// }
 
-console.log('Escola Cod3r'.reverse());
+// obj1.falar();
+// obj2.nome = 'Rafael';
+// obj2.falar();
+
+// const obj3 = {};
+// obj3.__proto__ = MeuObjeto.prototype; // __proto__: Pertence a instância e é uma referência ao objeto-pai.
+// obj3.nome = "Obj3";
+// obj3.falar();
+
+
+// // Resumindo a loucura
+// console.log((new MeuObjeto).__proto__ === MeuObjeto.prototype)
+// console.log(MeuObjeto.__proto__ === Function.prototype)
+// console.log(Function.prototype.__proto__ === Object.prototype)
+
+// console.log('------------------------------')
+// // Com o conceito de protótipo e herança podemos criar novos comportamentos em funções construturoras da própria API
+// console.log(typeof String);
+// console.log(typeof Array);
+// console.log(typeof Object);
+
+// String.prototype.reverse = function () {
+//     return this.split('').reverse().join('');
+// }
+
+// console.log('Escola Cod3r'.reverse());
+
+// Array.prototype.first = function () {
+//     return this[0];
+// }
+
+// console.log([1, 2, 3, 4, 5].first());
+// console.log(['a', 'b', 'c'].first());
+
+// String.prototype.toString = function () {
+//     return 'Lascou tudo!'; // Não substitua comportamentos que já existam de maneira global
+// }
+
+// console.log('Escola Cod3r'.reverse());
 
 
 

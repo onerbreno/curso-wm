@@ -38,7 +38,3 @@ console.log('o1', o1);
 console.log('o2', o2);
 console.log('obj', obj);
 
-// Com o Object.freeze o objeto não permitirá qualquer alteração
-Object.freeze(obj);
-obj.c = 1234;
-console.log(obj);
