@@ -50,3 +50,6 @@ class Filho extends Pai {
         super('Silva')
     }
 }
+
+const filho = new Filho
+console.log(filho)
