@@ -5,7 +5,7 @@ function Carro(velocidadeMaxima = 200, delta = 5) {
   let velocidadeAtual = 0
 
   // método público
-  this.acelarar = function() {
+  this.acelerar = function() {
     if (velocidadeAtual + delta <= velocidadeMaxima) {
       velocidadeAtual += delta
     } else {
@@ -20,12 +20,12 @@ function Carro(velocidadeMaxima = 200, delta = 5) {
 }
 const uno = new Carro
 console.log(uno)
-uno.acelarar()
+uno.acelerar()
 console.log(uno.getVelocidadeAtual())
 
 const ferrari = new Carro(320, 20)
-ferrari.acelarar()
-ferrari.acelarar()
+ferrari.acelerar()
+ferrari.acelerar()
 console.log(ferrari.getVelocidadeAtual())
 
 function Ventilador(velMax) {
