@@ -5,6 +5,9 @@ const produtos = [
     { nome: 'Copo de Plástico', preco: 18.99, fragil: false},
 ]
 
+// retorna um novo array com os elementos filtrados a partir de uma função callback.
+// o retorno da callback é um valor booleano, se for true o elemento é inserido no novo array
+
 console.log(produtos.filter(function(p) {
     return false
 }))

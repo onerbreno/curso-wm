@@ -1,5 +1,8 @@
 const aprovados = ['Agatha', 'Aldo', 'Daniel', 'Raquel']
 
+// aplica uma função callback sobre cada elemento do próprio array
+// ou seja, ele não retorna outro array mas transforma diretamente o que foi passado 
+
 aprovados.forEach(function(nome, indice, array) {
     console.log(`${indice + 1}) ${nome}`)
     console.log(array)

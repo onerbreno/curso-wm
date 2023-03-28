@@ -5,6 +5,12 @@ const alunos = [
     { nome: 'Ana', nota: 8.7, bolsista: true },
 ]
 
+// ideia de reduzir ou agregar em um único elemento
+
+// retorna um único elemento a partir de uma função callback 
+// que utiliza um acumulador e percorre todos os elementos do array, o acumulador é passado 
+// para a próxima iteração e no final ele é retornado
+
 let somaNotas = alunos.map(e => e.nota).reduce(function(acumulador, atual, i) {
         console.log(acumulador, atual, i)
         return acumulador + atual
