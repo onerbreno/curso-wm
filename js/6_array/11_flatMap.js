@@ -17,7 +17,6 @@ const escola = [{
         nota: 9.1
     }]
 }]
-
 const getNotasAlunos = aluno => aluno.nota
 const getNotasTurma = turma => turma.alunos.map(getNotasAlunos)
 
