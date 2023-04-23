@@ -1,4 +1,4 @@
-// Como setar valores default para os parametros de uma função?
+// Como setar valores default para os parâmetros de uma função?
 
 // valor padrão do es2015
 function soma3(a = 1, b = 1, c = 1) {
