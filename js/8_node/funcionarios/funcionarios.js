@@ -8,7 +8,7 @@ axios.get(url).then(response => {
     const funcionarios = response.data
 
     // melhor chinesa com menor salário
-    const mulherChinesaMenorSalario = funcionarios.filter(getChineseWomen).reduce(getMenorSalario)
+    const mulherChinesaMenorSalario = funcionarios.filter(getMulheresChinesas).reduce(getMenorSalario)
 
     console.log(mulherChinesaMenorSalario)
 })
