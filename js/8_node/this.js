@@ -12,4 +12,8 @@ function logThis() {
     console.log(this === global)
 }
 
+const arrowFunctions = () => {
+    console.log(this === global)
+    console.log(this === module.exports)
+}
 logThis()
