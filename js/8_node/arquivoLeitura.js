@@ -14,7 +14,7 @@ fs.readFile(caminho, 'utf-8', (err, conteudo) => {
 })
 
 // leitura de um json, especificamente, é muito mais fácil
-const config = require('./arquivo.json')
+const config = require('./arquivo.json') // é necessário passar a extensão, pois o default (sem extensão) são arquivos js
 console.log(config.db)
 
 // leitura de pasta
