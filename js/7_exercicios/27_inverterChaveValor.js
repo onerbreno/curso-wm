@@ -12,13 +12,18 @@ function inverterChaveValorObj(obj) {
     // }
     // return newObj
 
-    const invertedObj = {}
-    for (const chave in obj) {
-        const valor = obj[chave]
-        invertedObj[valor] = chave
-    }
+    // const invertedObj = {}
+    // for (const chave in obj) {
+    //     const valor = obj[chave]
+    //     invertedObj[valor] = chave
+    // }
 
-    return invertedObj
+    // return invertedObj
+
+    const paresDeChaveValorInvertidos = Object.entries(obj)
+        .map( parChaveValor => parChaveValor.reverse() )
+    return Object.fromEntries(paresDeChaveValorInvertidos)
+
     
 }
 

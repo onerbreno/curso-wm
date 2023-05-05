@@ -3,9 +3,9 @@ function converteParaInverso(valor) {
     if(typeof valor === 'boolean') {
         valorConvertido = !valor
     } else if (typeof valor === 'number') {
-        valorConvertido = valor < 0 ? valor * -1 : valor * -1
+        valorConvertido = -valor
     } else {
-        return `Booleano ou número esperados, mas o parâmetro é do tipo ${typeof valor}`
+        return `Booleano ou número esperados, o parâmetro é do tipo ${typeof valor}`
     }
 
     return valorConvertido

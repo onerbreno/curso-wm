@@ -1,5 +1,6 @@
 function menorNumero(array) {
-    return array.reduce((menor, elemento) => menor = menor > elemento ? elemento : menor)
+    return array.reduce((menor, elemento) => menor > elemento ? elemento : menor)
+    // return Math.min(...numeros);
 }
 
 console.log(menorNumero([0, 1, 2, 3, 4]))
