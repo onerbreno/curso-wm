@@ -1,6 +1,7 @@
 // prefira fazer "for's com propósito" 
 // ex: filter, map...
 
+// iterando sobre string
 for (let letra of "Cod3r") {
     console.log(letra)
 }
@@ -37,7 +38,7 @@ for (let [chave, valor] of asssutosMap.entries()) {
     console.log(chave, valor)
 }
 
-const s = new Set(['a', 'b', 'c'])
+const s = new Set(['a', 'b', 'c', 'c'])
 for (let letra of s) {
     console.log(letra)
 }

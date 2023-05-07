@@ -1,6 +1,6 @@
 const sequencia = {
     _valor: 1, // o _ é uma convenção para nomes de atributos privados
-    // JS não possui atributos privados, nesse caso é o usado a ideia de closures para "privar" o atributo mas é possível bular isso
+    // JS não possui atributos privados, nesse caso é usado a ideia de closures para "privar" o atributo mas é possível bular isso
     get valor() { return this._valor++ }, // JS não suporta sobrecarga de métodos, com "exceção" do get e set
     set valor(valor) {
         if (valor > this._valor) {
