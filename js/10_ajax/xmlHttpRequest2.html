@@ -22,36 +22,68 @@
     <div class="progresso"></div>
 
     <script>
+        // Cria uma função chamada ajaxUpload que recebe um objeto config como parâmetro
         function ajaxUpload(config) {
+
+            // Cria uma instância do objeto XMLHttpRequest
             const xhr = new XMLHttpRequest()
 
+            // Verifica se o navegador suporta o objeto "upload" (para upload de arquivos)
             if (xhr.upload) {
+
+                // Define uma função para ser chamada quando o progresso do upload mudar
                 xhr.upload.onprogress = e => {
+
+                    // Calcula a quantidade de dados já enviados e o tamanho total do arquivo
                     const atual = e.loaded
                     const total = e.total
+
+                    // Calcula o percentual de conclusão do upload
                     const percentual = Math.floor(atual / total * 100)
+
+                    // Chama a função "progresso" definida na configuração da requisição,
+                    // passando um objeto com a quantidade de dados já enviados, o tamanho total do arquivo
+                    // e o percentual de conclusão como parâmetros
                     config.progresso({ atual, total, percentual })
                 }
             }
 
+            // Configura a requisição HTTP com o método, URL e se deve ser assíncrona ou não
             xhr.open("post", config.url, true)
 
+            // Envia a requisição HTTP, passando os dados do formulário como parâmetro
             xhr.send(config.formData)
         }
-        
+
+        // Define uma função para ser chamada quando o usuário selecionar um arquivo para upload
         document.querySelector('input[type=file]').onchange = e => {
+
+            // Cria um objeto "FormData" para encapsular os dados do formulário
             const formData = new FormData()
+
+            // Obtém o elemento de entrada de arquivo que foi selecionado pelo usuário
             const inputFile = e.target
+
+            // Adiciona o arquivo selecionado ao objeto "FormData"
             formData.append(inputFile.name, inputFile.files[0])
 
+            // Faz o upload do arquivo usando a função "ajaxUpload", passando um objeto de configuração como parâmetro
             ajaxUpload({
+
+                // Define a URL para enviar o arquivo
                 url: 'upload',
-                formData,
-                progresso(dados) {
+                formData, // Passa os dados do formulário encapsulados no objeto "FormData" como parâmetro
+
+                progresso(dados) { // Define a função a ser chamada quando o progresso do upload mudar
+
+                    // Obtém o elemento HTML que mostrará o progresso do upload
                     const progresso = document.querySelector('.progresso')
+                    
+                    // Define o conteúdo HTML do elemento para exibir o objeto "dados" em formato JSON
                     progresso.innerHTML = JSON.stringify(dados)
                 }
             })
         }
+
     </script>
 </body>

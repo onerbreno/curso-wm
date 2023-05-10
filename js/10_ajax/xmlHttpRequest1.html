@@ -12,58 +12,83 @@
 
     <script>
         function ajax(config) {
-            const xhr = new XMLHttpRequest()
-            xhr.open(config.metodo, config.url, true)
+            // cria um objeto de requisição XMLHttpRequest
+            const xhr = new XMLHttpRequest();
+
+            // abre a conexão com a URL especificada em config.url,
+            // usando o método HTTP especificado em config.metodo
+            xhr.open(config.metodo, config.url, true);
+
+            // define a função a ser executada quando a requisição for concluída
             xhr.onload = e => {
+                // verifica se o status da resposta é 200 (OK)
                 if (xhr.status === 200) {
-                    config.sucesso(xhr.response)
+                    // chama a função sucesso especificada em config,
+                    // passando a resposta como argumento
+                    config.sucesso(xhr.response);
                 } else if (xhr.status >= 400) {
+                    // se o status da resposta for um erro (>= 400),
+                    // chama a função erro especificada em config,
+                    // passando um objeto com o código e texto de erro
                     config.erro({
                         codigo: xhr.status,
-                        texto: xhr.statusText
-                    })
+                        texto: xhr.statusText,
+                    });
                 }
-            }
+            };
 
-            xhr.send()
+            // envia a requisição
+            xhr.send();
         }
 
         function criarTabela(estados) {
+            // mapeia cada objeto estado em um elemento <tr> da tabela
             const linhas = estados.map(estado => {
-                const tdId = document.createElement('td')
-                tdId.innerHTML = estado.id
+                // cria um elemento <td> para o ID do estado
+                const tdId = document.createElement("td");
+                tdId.innerHTML = estado.id;
 
-                const tdNome = document.createElement('td')
-                tdNome.innerHTML = estado.nome
+                // cria um elemento <td> para o nome do estado
+                const tdNome = document.createElement("td");
+                tdNome.innerHTML = estado.nome;
 
-                const tdSigla = document.createElement('td')
-                tdSigla.innerHTML = estado.sigla
+                // cria um elemento <td> para a sigla do estado
+                const tdSigla = document.createElement("td");
+                tdSigla.innerHTML = estado.sigla;
 
-                const tr = document.createElement('tr')
+                // cria um elemento <tr> que contém as <td>s acima
+                const tr = document.createElement("tr");
+                tr.appendChild(tdId);
+                tr.appendChild(tdNome);
+                tr.appendChild(tdSigla);
+                return tr;
+            });
 
-                tr.appendChild(tdId)
-                tr.appendChild(tdNome)
-                tr.appendChild(tdSigla)
+            // cria um elemento <table> que contém todas as linhas
+            const tabela = document.createElement("table");
+            linhas.forEach(linha => tabela.appendChild(linha));
 
-                return tr
-            })
-
-            const tabela = document.createElement('table')
-            linhas.forEach(linha => tabela.appendChild(linha))
-            document.body.appendChild(tabela)
+            // adiciona a tabela ao corpo do documento HTML
+            document.body.appendChild(tabela);
         }
-        
+        // Faz uma requisição AJAX para o arquivo "estados.json" e cria a tabela quando a resposta chegar
         ajax({
+            // define a URL do arquivo JSON que contém os dados dos estados
             url: "dados/estados.json",
+            // define o método HTTP a ser usado para buscar o arquivo (GET)
             metodo: "get",
             sucesso(resposta) {
-                const estados = JSON.parse(resposta)
-                criarTabela(estados)
+                // converte a resposta JSON em um array de objetos
+                const estados = JSON.parse(resposta);
+                // cria a tabela a partir do array de objetos
+                criarTabela(estados);
             },
             erro(e) {
-                const msg = document.createTextNode(`${e.codigo}: ${e.texto}`)
-                document.body.appendChild(msg)
-            }
-        })
+                // cria um nó de texto com a mensagem de erro e adiciona ao corpo do documento
+                const msg = document.createTextNode(`${e.codigo}: ${e.texto}`);
+                document.body.appendChild(msg);
+            },
+        });
+
     </script>
 </body>

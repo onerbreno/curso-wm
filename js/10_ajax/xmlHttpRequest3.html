@@ -11,6 +11,76 @@
     <h1>Estados</h1>
 
     <script>
-        // ...
+        // Cria uma função chamada ajax que recebe um objeto config como parâmetro
+        function ajax(config) {
+
+            // Cria uma instância do objeto XMLHttpRequest
+            const xhr = new XMLHttpRequest()
+
+            // Configura a requisição HTTP com o método, URL e se deve ser assíncrona ou não
+            xhr.open(config.metodo, config.url, true)
+
+            // Define uma função para ser chamada quando o estado da requisição HTTP mudar
+            xhr.onreadystatechange = e => {
+
+                // Verifica se o estado da requisição é "concluído"
+                if (xhr.readyState === 4) {
+
+                    // Verifica se o status da resposta é "sucesso"
+                    if (xhr.status === 200) {
+
+                        // Chama a função "sucesso" definida na configuração da requisição,
+                        // passando a resposta XML como parâmetro
+                        config.sucesso(xhr.responseXML)
+
+                    } else if (xhr.status >= 400) {
+                        // Caso contrário, chama a função "erro" definida na configuração da requisição,
+                        // passando um objeto com o código de status e o texto do status como parâmetros
+                        config.erro({
+                            codigo: xhr.status,
+                            texto: xhr.statusText
+                        })
+                    }
+                }
+            }
+
+            // Envia a requisição HTTP
+            xhr.send()
+        }
+
+        // Faz uma requisição HTTP usando a função "ajax", passando um objeto de configuração como parâmetro
+        ajax({
+
+            // Define a URL da requisição
+            url: "dados/estados.xml",
+
+            // Define o método da requisição
+            metodo: "GET",
+
+            // Define a função a ser chamada quando a requisição for bem-sucedida
+            sucesso(resposta) {
+
+                // Busca todos os elementos "estado" na resposta XML
+                const estados = resposta.getElementsByTagName('estado')
+
+                // Converte a lista de elementos em uma string HTML, contendo um item de lista para cada estado
+                const itens = Array.from(estados).reduce((html, estado) => html + `<li>${estado.attributes.nome.value}</li>`, '')
+
+                // Adiciona a lista de estados à página HTML
+                document.body.insertAdjacentHTML('beforeend', `<ul>${itens}</ul>`)
+            },
+
+            // Define a função a ser chamada quando a requisição falhar
+            erro(e) {
+
+                // Cria um nó de texto com a mensagem de erro
+                const msg = document.createTextNode(`${e.codigo}: ${e.texto}`)
+                
+                // Adiciona a mensagem de erro à página HTML
+                document.body.appendChild(msg)
+            }
+        })
+
+
     </script>
 </body>
