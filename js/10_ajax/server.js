@@ -35,12 +35,24 @@ app.post('/upload', (req, res) => {
     })
 })
 
+// Rota POST '/formulario'
 app.post('/formulario', (req, res) => {
     res.send({
-        ...req.body,
-        id: 1
+        ...req.body, // Retorna os dados recebidos no corpo da solicitação
+        id: 1 // Adiciona uma propriedade "id" com o valor 1
     })
 })
 
+app.get('/parOuImpar', (req, res) => {
+    // formas de receber dados do frontend
+    // req.body -> corpo da requisição
+    // req.query -> /parOuImpar?numero=3
+    // req.params -> /parOuImpar/3
+    const par = parseInt(req.query.numero) % 2 === 0
+    res.send({
+        resultado: par ? 'par' : 'impar'
+    })
+})
+  
 // Inicia o servidor na porta 8080
 app.listen(8080, () => console.log('Executando...'))

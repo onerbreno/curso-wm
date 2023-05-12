@@ -29,34 +29,42 @@
     </form>
     <div id="resultado"></div>
     <script>
+        // Adicionando um evento de submissão ao formulário do usuário
         document.usuarioForm.onsubmit = async e => {
-            e.preventDefault()
+            e.preventDefault() // Impede o comportamento padrão do formulário de recarregar a página
 
-            const form = e.target
-            const data = new FormData(form)
-            data.append('ajax', true)
+            const form = e.target // Obtém o formulário submetido
+            const data = new FormData(form) // Cria um objeto FormData para coletar os dados do formulário
+            data.append('ajax', true) // Adiciona um par chave/valor ao objeto FormData
 
             const options = {
-                method: form.method ?? 'POST',
+                method: form.method ?? 'POST', // Obtém o método do formulário ou usa 'POST' por padrão
+
+                // Codifica os dados do formulário em uma sequência de parâmetros de URL
+                // Isso permite que os dados sejam enviados junto com a solicitação HTTP
                 body: new URLSearchParams(data)
             }
 
-            const resultado = document.getElementById('resultado')
-            // fetch(form.action, options)
-            //     .then(resp => resp.json())
-            //     .then(json => {
-            //         resultado.innerHTML = JSON.stringify(json)
-            //     })
-            //     .catch(e => {
-            //         resultado.innerHTML = e
-            //     })
-            
+            const resultado = document.getElementById('resultado') // Obtém o elemento HTML para exibir o resultado
+
+            // Envia uma solicitação AJAX usando fetch, trata a resposta como JSON e atualiza o resultado
+            /*
+            fetch(form.action, options)
+                .then(resp => resp.json())
+                .then(json => {
+                    resultado.innerHTML = JSON.stringify(json)
+                })
+                .catch(e => {
+                    resultado.innerHTML = e
+                })
+            */
+
             try {
-                const resp = await fetch(form.action, options)
-                const json = await resp.json()
-                resultado.innerHTML = JSON.stringify(json)
+                const resp = await fetch(form.action, options) // Envia a solicitação assincronamente e aguarda a resposta
+                const json = await resp.json() // Analisa a resposta como JSON
+                resultado.innerHTML = JSON.stringify(json) // Exibe o JSON no resultado
             } catch (e) {
-                resultado.innerHTML = e
+                resultado.innerHTML = e // Em caso de erro durante a solicitação, exibe o erro no elemento 'resultado'
             }
         }
     </script>
